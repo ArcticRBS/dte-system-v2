@@ -225,3 +225,21 @@
 - [x] Testar operações de leitura/escrita no Supabase
 - [x] Sincronizar código atualizado com GitHub
 - [x] Verificar se todos os arquivos estão no repositório
+
+## Migração para Supabase
+- [x] Criar cliente Supabase (server e frontend)
+- [x] Configurar chaves de API do Supabase
+- [x] Tabelas já existentes no Supabase (15 tabelas)
+- [x] Banco atual continua funcionando em paralelo
+
+## Autenticação Social Supabase
+- [x] Configurar Supabase Auth
+- [x] Implementar login com Google
+- [x] Implementar login com GitHub
+- [x] Criar página de callback OAuth
+- [x] Atualizar fluxo de autenticação no frontend
+
+## Realtime Supabase
+- [x] Habilitar Realtime nas tabelas (users, eleitorado, resultados_eleitorais)
+- [x] Implementar hook de notificações em tempo real
+- [x] Criar listeners para atualizações de dados

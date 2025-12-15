@@ -25,6 +25,7 @@ import BackupDados from "./pages/BackupDados";
 import BackupsAgendados from "./pages/BackupsAgendados";
 import DashboardComparativo from "./pages/DashboardComparativo";
 import Notificacoes from "./pages/Notificacoes";
+import AuthCallback from "./pages/AuthCallback";
 
 function Router() {
   return (
@@ -32,6 +33,7 @@ function Router() {
       {/* Public Routes */}
       <Route path="/" component={Home} />
       <Route path="/login" component={Login} />
+      <Route path="/auth/callback" component={AuthCallback} />
       <Route path="/demo" component={Demo} />
       
       {/* Protected Routes - Dashboard */}
