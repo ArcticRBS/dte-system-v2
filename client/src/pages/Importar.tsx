@@ -20,14 +20,15 @@ import {
 import { useState, useRef } from "react";
 import { useLocation } from "wouter";
 
-const datasetTypes = [
-  { value: "eleitorado", label: "Perfil do Eleitorado", description: "Dados demográficos dos eleitores" },
+type DatasetType = "eleitorado" | "candidatos" | "partidos" | "coligacoes" | "resultados" | "votos_nulos_brancos";
+
+const datasetTypes: { value: DatasetType; label: string; description: string }[] = [
+  { value: "eleitorado", label: "Perfil do Eleitorado (TSE)", description: "Dados demográficos dos eleitores - perfil_eleitorado" },
+  { value: "candidatos", label: "Candidatos (TSE)", description: "Cadastro de candidatos - consulta_cand" },
+  { value: "partidos", label: "Partidos (TSE)", description: "Cadastro de partidos políticos - consulta_legendas" },
+  { value: "coligacoes", label: "Coligações (TSE)", description: "Coligações partidárias - consulta_coligacao" },
   { value: "resultados", label: "Resultados Eleitorais", description: "Votação por candidato e partido" },
   { value: "votos_nulos_brancos", label: "Votos Nulos e Brancos", description: "Dados de votos nulos, brancos e abstenções" },
-  { value: "zonas", label: "Zonas Eleitorais", description: "Informações das zonas e seções" },
-  { value: "bairros", label: "Bairros", description: "Dados geográficos dos bairros" },
-  { value: "partidos", label: "Partidos", description: "Cadastro de partidos políticos" },
-  { value: "candidatos", label: "Candidatos", description: "Cadastro de candidatos" },
 ];
 
 function getStatusIcon(status: string) {
@@ -72,7 +73,7 @@ export default function Importar() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [tipoDataset, setTipoDataset] = useState("");
+  const [tipoDataset, setTipoDataset] = useState<DatasetType | "">("eleitorado");
   const [anoReferencia, setAnoReferencia] = useState("2024");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -247,7 +248,7 @@ export default function Importar() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label>Tipo de Dataset</Label>
-                <Select value={tipoDataset} onValueChange={setTipoDataset}>
+                <Select value={tipoDataset} onValueChange={(value) => setTipoDataset(value as DatasetType)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Selecione o tipo de dados" />
                   </SelectTrigger>

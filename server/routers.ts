@@ -218,7 +218,7 @@ const importacoesRouter = router({
       z.object({
         nomeArquivo: z.string(),
         tipoArquivo: z.string(),
-        tipoDataset: z.string(),
+        tipoDataset: z.enum(["eleitorado", "candidatos", "partidos", "coligacoes", "resultados", "votos_nulos_brancos"]),
         anoReferencia: z.number().optional(),
       })
     )
@@ -249,7 +249,7 @@ const importacoesRouter = router({
     .input(
       z.object({
         importacaoId: z.number(),
-        tipoDataset: z.string(),
+        tipoDataset: z.enum(["eleitorado", "candidatos", "partidos", "coligacoes", "resultados", "votos_nulos_brancos"]),
         data: z.array(z.record(z.string(), z.unknown())),
         anoReferencia: z.number().optional(),
       })

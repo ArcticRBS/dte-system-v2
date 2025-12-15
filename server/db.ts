@@ -380,14 +380,18 @@ export async function createImportacao(data: {
   userId: number;
   nomeArquivo: string;
   tipoArquivo: string;
-  tipoDataset: string;
+  tipoDataset: "eleitorado" | "candidatos" | "partidos" | "coligacoes" | "resultados" | "votos_nulos_brancos";
   anoReferencia?: number;
 }) {
   const db = await getDb();
   if (!db) return null;
 
   const result = await db.insert(importacoes).values({
-    ...data,
+    userId: data.userId,
+    nomeArquivo: data.nomeArquivo,
+    tipoArquivo: data.tipoArquivo,
+    tipoDataset: data.tipoDataset,
+    anoReferencia: data.anoReferencia,
     status: "pendente",
   });
 

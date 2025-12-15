@@ -82,3 +82,11 @@
 - [x] Corrigir landing page não aparecendo no deploy Vercel
 - [x] Criar landing page profissional com logo DATA-RO
 - [x] Atualizar sidebar com logo DATA-RO
+
+## Datasets TSE - Rondônia
+- [x] Criar estrutura de tabelas para dados do TSE (eleitores, candidatos, partidos, coligações)
+- [x] Implementar upload de CSV/Excel para eleitores
+- [x] Implementar upload para candidatos
+- [x] Implementar upload para partidos e coligações
+- [x] Criar templates de importação
+- [x] Documentar formato esperado dos arquivos
