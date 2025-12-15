@@ -79,4 +79,6 @@
 - [x] Integrar filtros dinâmicos com o mapa
 
 ## Correções
-- [ ] Corrigir landing page não aparecendo no deploy Vercel
+- [x] Corrigir landing page não aparecendo no deploy Vercel
+- [ ] Criar landing page profissional com logo DATA-RO
+- [ ] Atualizar sidebar com logo DATA-RO

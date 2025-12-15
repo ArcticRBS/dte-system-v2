@@ -96,9 +96,11 @@ export function DTELayout({ children }: { children: React.ReactNode }) {
             <Menu className="w-5 h-5" />
           </button>
           <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <BarChart3 className="w-5 h-5 text-primary-foreground" />
-            </div>
+            <img 
+              src="/dataro-logo.jpeg" 
+              alt="DATA-RO" 
+              className="w-10 h-10 rounded-lg shadow"
+            />
             <span className="font-semibold">DTE</span>
           </Link>
           <div className="w-10" />
@@ -124,9 +126,11 @@ export function DTELayout({ children }: { children: React.ReactNode }) {
           {/* Logo */}
           <div className="flex items-center justify-between px-6 h-16 border-b border-sidebar-border">
             <Link href="/dashboard" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg">
-                <BarChart3 className="w-6 h-6 text-primary-foreground" />
-              </div>
+              <img 
+                src="/dataro-logo.jpeg" 
+                alt="DATA-RO" 
+                className="w-12 h-12 rounded-xl shadow-lg"
+              />
               <div>
                 <h1 className="font-bold text-lg text-sidebar-foreground">DTE</h1>
                 <p className="text-xs text-muted-foreground">Data Tracking Eleitoral</p>
