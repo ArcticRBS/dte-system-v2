@@ -259,3 +259,7 @@
 - [x] Adicionar indicador no header mobile
 - [x] Adicionar indicador no sidebar desktop
 - [x] Mostrar status visual com tooltip (conectado/conectando/desconectado)
+
+## Rodapé Landing Page
+- [x] Adicionar logo DATA-RO INTELIGÊNCIA TERRITORIAL no rodapé
+- [x] Adicionar texto "Todos os direitos reservados"
