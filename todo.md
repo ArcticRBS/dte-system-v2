@@ -103,9 +103,9 @@
 - [ ] Criar usuários gestores no sistema
 
 ## Sistema de Login Tradicional
-- [ ] Atualizar schema do banco para suportar login com senha
-- [ ] Implementar hash de senha com bcrypt
-- [ ] Criar rotas de autenticação (login, registro, logout)
-- [ ] Criar página de login
-- [ ] Criar página de registro
-- [ ] Preparar estrutura para SSO futuro (Google, GitHub)
+- [x] Atualizar schema do banco para suportar login com senha
+- [x] Implementar hash de senha com bcrypt
+- [x] Criar rotas de autenticação (login, registro, logout)
+- [x] Criar página de login
+- [x] Criar página de registro
+- [x] Preparar estrutura para SSO futuro (Google, GitHub)
