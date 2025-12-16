@@ -8,4 +8,11 @@ export const ENV = {
   supabaseUrl: process.env.SUPABASE_URL ?? "",
   supabaseAnonKey: process.env.SUPABASE_ANON_KEY ?? "",
   supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY ?? "",
+  // Owner configuration
+  ownerOpenId: process.env.OWNER_OPEN_ID ?? "",
+  // Forge API (optional)
+  forgeApiUrl: process.env.FORGE_API_URL ?? "",
+  forgeApiKey: process.env.FORGE_API_KEY ?? "",
+  // OAuth (optional)
+  oAuthServerUrl: process.env.OAUTH_SERVER_URL ?? "",
 };

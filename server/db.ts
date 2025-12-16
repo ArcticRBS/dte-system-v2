@@ -1,5 +1,5 @@
 import { eq, and, desc, sql, gte, lte, sum, count, or, isNull } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/node-postgres";
 import {
   InsertUser,
   users,
@@ -88,7 +88,8 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       updateSet.lastSignedIn = new Date();
     }
 
-    await db.insert(users).values(values).onDuplicateKeyUpdate({
+    await db.insert(users).values(values).onConflictDoUpdate({
+      target: users.openId,
       set: updateSet,
     });
   } catch (error) {
@@ -405,9 +406,9 @@ export async function createImportacao(data: {
     tipoDataset: data.tipoDataset,
     anoReferencia: data.anoReferencia,
     status: "pendente",
-  });
+  }).returning({ id: importacoes.id });
 
-  return result[0].insertId;
+  return result[0]?.id;
 }
 
 export async function updateImportacao(id: number, data: Partial<typeof importacoes.$inferInsert>) {
@@ -534,15 +535,15 @@ export async function bulkInsertCandidatos(data: (typeof candidatos.$inferInsert
 export async function insertMunicipio(data: typeof municipios.$inferInsert) {
   const db = await getDb();
   if (!db) return null;
-  const result = await db.insert(municipios).values(data);
-  return result[0].insertId;
+  const result = await db.insert(municipios).values(data).returning({ id: municipios.id });
+  return result[0]?.id;
 }
 
 export async function insertRegiao(data: typeof regioes.$inferInsert) {
   const db = await getDb();
   if (!db) return null;
-  const result = await db.insert(regioes).values(data);
-  return result[0].insertId;
+  const result = await db.insert(regioes).values(data).returning({ id: regioes.id });
+  return result[0]?.id;
 }
 
 
@@ -629,7 +630,7 @@ export async function upsertSystemSetting(key: string, value: string, descriptio
   if (!db) return;
   await db.insert(systemSettings)
     .values({ settingKey: key, settingValue: value, description })
-    .onDuplicateKeyUpdate({ set: { settingValue: value, description } });
+    .onConflictDoUpdate({ target: systemSettings.settingKey, set: { settingValue: value, description } });
 }
 
 export async function deleteSystemSetting(key: string) {
@@ -935,8 +936,8 @@ export async function createScheduledBackup(data: {
     isActive: true,
     nextRunAt,
     createdBy: data.createdBy,
-  });
-  return result[0].insertId;
+  }).returning({ id: scheduledBackups.id });
+  return result[0]?.id;
 }
 
 export async function updateScheduledBackup(id: number, data: {
@@ -1032,8 +1033,8 @@ export async function createBackupHistoryEntry(data: {
     scheduledBackupId: data.scheduledBackupId,
     dataTypes: data.dataTypes,
     status: "running",
-  });
-  return result[0].insertId;
+  }).returning({ id: backupHistory.id });
+  return result[0]?.id;
 }
 
 export async function updateBackupHistoryEntry(id: number, data: {
@@ -1265,9 +1266,9 @@ export async function createAdminNotification(data: {
     category: data.category || "system",
     actionUrl: data.actionUrl,
     metadata: data.metadata,
-  });
+  }).returning({ id: adminNotifications.id });
   
-  return result[0].insertId;
+  return result[0]?.id;
 }
 
 export async function markNotificationAsRead(id: number) {
