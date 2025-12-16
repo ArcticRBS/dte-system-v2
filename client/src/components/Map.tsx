@@ -86,34 +86,22 @@ declare global {
   }
 }
 
-// Suporte para chave própria do Google Maps (Vercel) ou proxy Manus
-const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-const FORGE_API_KEY = import.meta.env.VITE_FRONTEND_FORGE_API_KEY;
-const FORGE_BASE_URL =
-  import.meta.env.VITE_FRONTEND_FORGE_API_URL ||
-  "https://forge.butterfly-effect.dev";
-
-// Determina qual método usar para carregar o Google Maps
-const useDirectGoogleMaps = !!GOOGLE_MAPS_API_KEY;
+// Chave do Google Maps API (configurar via variável de ambiente)
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
 
 function loadMapScript() {
   return new Promise(resolve => {
-    const script = document.createElement("script");
-    
-    if (useDirectGoogleMaps) {
-      // Usar chave própria do Google Maps (para deploy no Vercel)
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=weekly&libraries=marker,places,geocoding,geometry,visualization`;
-    } else {
-      // Usar proxy Manus (para ambiente de desenvolvimento)
-      const MAPS_PROXY_URL = `${FORGE_BASE_URL}/v1/maps/proxy`;
-      script.src = `${MAPS_PROXY_URL}/maps/api/js?key=${FORGE_API_KEY}&v=weekly&libraries=marker,places,geocoding,geometry,visualization`;
-      script.crossOrigin = "anonymous";
+    if (window.google?.maps) {
+      resolve(null);
+      return;
     }
-    
+
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=weekly&libraries=marker,places,geocoding,geometry,visualization`;
     script.async = true;
     script.onload = () => {
       resolve(null);
-      script.remove(); // Clean up immediately
+      script.remove();
     };
     script.onerror = () => {
       console.error("Failed to load Google Maps script");

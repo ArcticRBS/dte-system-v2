@@ -10,7 +10,7 @@ function createMockContext(role: "admin" | "gestor" | "politico" | "demo" | "use
     openId: "test-user",
     email: "test@example.com",
     name: "Test User",
-    loginMethod: "manus",
+    loginMethod: "email",
     role,
     createdAt: new Date(),
     updatedAt: new Date(),
